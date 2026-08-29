@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://example.org/pizza.owl"
+         xmlns="http://example.org/pizza.owl#">
+
+<owl:Ontology rdf:about="http://example.org/pizza.owl"/>
+
+<owl:ObjectProperty rdf:about="#hasTopping">
+  <rdfs:domain rdf:resource="#Pizza"/>
+  <rdfs:range rdf:resource="#Topping"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasTask">
+  <rdfs:domain rdf:resource="#AgentThing"/>
+  <rdfs:range rdf:resource="#Task"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#sender">
+  <rdfs:domain rdf:resource="#Message"/>
+  <rdfs:range rdf:resource="#AgentThing"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#receiver">
+  <rdfs:domain rdf:resource="#Message"/>
+  <rdfs:range rdf:resource="#AgentThing"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#aboutPizza">
+  <rdfs:domain rdf:resource="#Message"/>
+  <rdfs:range rdf:resource="#Pizza"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#vegetarianOnly">
+  <rdfs:domain rdf:resource="#Chef"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#quantity">
+  <rdfs:domain rdf:resource="#Message"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#Pizza">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Topping">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MeatTopping">
+  <rdfs:subClassOf rdf:resource="#Topping"/>
+</owl:Class>
+
+<owl:Class rdf:about="#VegTopping">
+  <rdfs:subClassOf rdf:resource="#Topping"/>
+</owl:Class>
+
+<owl:Class rdf:about="#VegetarianPizza">
+  <rdfs:subClassOf rdf:resource="#Pizza"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Pizza"/>
+        <owl:Class>
+          <owl:complementOf>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#hasTopping"/>
+              <owl:someValuesFrom rdf:resource="#MeatTopping"/>
+            </owl:Restriction>
+          </owl:complementOf>
+        </owl:Class>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#AgentThing">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Chef">
+  <rdfs:subClassOf rdf:resource="#AgentThing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Customer">
+  <rdfs:subClassOf rdf:resource="#AgentThing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Courier">
+  <rdfs:subClassOf rdf:resource="#AgentThing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Dispatcher">
+  <rdfs:subClassOf rdf:resource="#AgentThing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Task">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#OrderPizzaTask">
+  <rdfs:subClassOf rdf:resource="#Task"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BakePizzaTask">
+  <rdfs:subClassOf rdf:resource="#Task"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DeliverPizzaTask">
+  <rdfs:subClassOf rdf:resource="#Task"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DispatchTask">
+  <rdfs:subClassOf rdf:resource="#Task"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Message">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#OrderRequest">
+  <rdfs:subClassOf rdf:resource="#Message"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BakeOrder">
+  <rdfs:subClassOf rdf:resource="#Message"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DeliveryOrder">
+  <rdfs:subClassOf rdf:resource="#Message"/>
+</owl:Class>
+
+
+</rdf:RDF>
